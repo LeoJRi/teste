@@ -30,20 +30,21 @@ main{
     width: 100%;
     max-width: 1200px;
 }
-.left{
+.top-content{
     margin-top: 0px;
     display: flex;
     justify-content: space-between;
 }
-.widthonehundred{
+.content-table{
     width: 100%;
     text-align: center;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
 }
-.configTable{
+.organize-table{
     margin-top: 15px;
+    min-width: 300px;
 }
 .first-table {
     margin-top: 35px;
