@@ -1,26 +1,26 @@
 $(document).ready(() => {
-	verdictInput();
-	generateSentence();
+	entradaDeSentenca();
+	geradorDeSentenca();
 	stepByStep();
-    cleanAnalyzer();
+    limparAnalizador();
 });
 
-const verdictInput = () => {
+const entradaDeSentenca = () => {
 	$('#verdict-input').keyup(() => {
 		let sentence = $('#verdict-input').val();
 		if((sentence !== '')) {
-			disabledTrueOrFalse('verdict-input-true');
+			desabilitaCampo('verdict-input-true');
 		} else {
-			disabledTrueOrFalse('verdict-input-false');
+			desabilitaCampo('verdict-input-false');
 		}
 	});
 }
 
 const executeAnalyzer = () => {
 	if(startAnalyzer) {
-		disabledTrueOrFalse('execute-analyzer');
+		desabilitaCampo('execute-analyzer');
 		verdict.input = $('#verdict-input').val();
-		insertVerdict();
+		insereSentenca();
 		startAnalyzer = false;
 	}	
 	tableAnalyzer();
@@ -32,7 +32,7 @@ const executeAnalyzer = () => {
 	}
 }
 
-const insertVerdict = () => {
+const insereSentenca = () => {
 	let verdictPag = '';
 	for(let i=0; i<verdict.input.length; i++) {
 		verdictPag = `<li id="letter${i}"><a>${verdict.input[i]}</a></li>`;
@@ -40,9 +40,9 @@ const insertVerdict = () => {
 	}
 }
 
-const generateSentence = () => {
+const geradorDeSentenca = () => {
 	$('#generate-sentence').on('click', () => {
-		disabledTrueOrFalse('generate-sentence-true');
+		desabilitaCampo('generate-sentence-true');
 		let element = 'S';
 		while(changeElement(element)) {
 			$('#verdict-input').val(element);
@@ -53,7 +53,7 @@ const generateSentence = () => {
 	});
 }
 
-const cleanAnalyzer = () => {
+const limparAnalizador = () => {
 	$('#clean-analyzer').on('click', () => {
 		window.location.reload();
 	});
@@ -62,9 +62,9 @@ const cleanAnalyzer = () => {
 const stepByStep = () => {
 	$('#step-by-step').on('click', () => {
 		if(startAnalyzer) {
-			disabledTrueOrFalse('step-by-step');
+			desabilitaCampo('step-by-step');
 			verdict.input = $('#verdict-input').val();
-			insertVerdict();
+			insereSentenca();
 			startAnalyzer = false;
 		}
 		tableAnalyzer();
@@ -76,7 +76,7 @@ const setSentence = element => {
 	for (let i=0; i<element.length; i++){
 		let arrayElement = element[i];
 		if (testLetters(arrayElement)){
-			let temp = searchForPossibility(arrayElement);
+			let temp = pesquisaDePossibilidades(arrayElement);
 			result += temp;
 		} else {
 			result += arrayElement;
@@ -85,7 +85,7 @@ const setSentence = element => {
 	return result;
 }
 
-const searchForPossibility = element => {
+const pesquisaDePossibilidades = element => {
 	let alvo = toDrawElement(notTerminals[element].size);
 	return notTerminals[element][alvo];
 }
@@ -116,7 +116,7 @@ const reverseElement = element => {
 	return invertedElement;
 }
 
-const disabledTrueOrFalse = element => {
+const desabilitaCampo = element => {
 	if(element === 'step-by-step') {
 		$('#execute-analyzer').addClass('disabled');
 		$('#generate-sentence').addClass('disabled');
