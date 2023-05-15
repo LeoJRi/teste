@@ -75,7 +75,7 @@ const setSentence = element => {
 	let result = '';
 	for (let i=0; i<element.length; i++){
 		let arrayElement = element[i];
-		if (testLetters(arrayElement)){
+		if (testeLetras(arrayElement)){
 			let temp = pesquisaDePossibilidades(arrayElement);
 			result += temp;
 		} else {
@@ -97,14 +97,14 @@ const toDrawElement = element => {
 
 const changeElement = element => {
 	for (let i=0; i<element.length; i++){
-		if (testLetters(element[i])){
+		if (testeLetras(element[i])){
 			return true;
 		}
 	}
 	return false;
 }
 
-const testLetters = element => {
+const testeLetras = element => {
 	if((element.charCodeAt(0) >= 65) && (element.charCodeAt(0) <= 90)){
 		return true;
 	}
